@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Palette Studio — Find Your Perfect Colors</title>
+    <meta
+      name="description"
+      content="Generate beautiful five-color HEX combinations, lock your favorite swatches, explore color values, and copy colors instantly for your next design."
+    />
+    <meta property="og:title" content="Color Palette Studio — Find Your Perfect Colors" />
+    <meta
+      property="og:description"
+      content="Generate beautiful five-color HEX combinations, lock your favorite swatches, explore color values, and copy colors instantly for your next design."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='12' height='12' rx='3' fill='%23EA580C'/%3E%3Crect x='17' y='3' width='12' height='12' rx='3' fill='%23F59E0B'/%3E%3Crect x='3' y='17' width='12' height='12' rx='3' fill='%2327272A'/%3E%3Crect x='17' y='17' width='12' height='12' rx='3' fill='%2371717A'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Top Header -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#generator" class="brand-link" aria-label="Color Palette Studio Home">
+          <span class="css-color-grid" aria-hidden="true">
+            <span class="grid-cell cell-1"></span>
+            <span class="grid-cell cell-2"></span>
+            <span class="grid-cell cell-3"></span>
+            <span class="grid-cell cell-4"></span>
+          </span>
+          <span class="brand-name">Color Palette Studio</span>
+        </a>
+
+        <nav class="main-nav" id="main-nav" aria-label="Primary Navigation">
+          <a href="#generator" class="nav-link">Generator</a>
+          <a href="#recent-section" class="nav-link">Recent</a>
+          <a href="#how-it-works" class="nav-link">How It Works</a>
+          <a href="#about" class="nav-link">About</a>
+        </nav>
+
+        <div class="header-right">
+          <span class="status-indicator" aria-live="polite" id="header-status">
+            Ready to create
+          </span>
+          <button
+            type="button"
+            class="mobile-menu-btn"
+            id="mobile-menu-btn"
+            aria-expanded="false"
+            aria-controls="main-nav"
+            aria-label="Toggle navigation menu"
+          >
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="hero-kicker">RANDOM COLOR GENERATOR</p>
+            <h1 class="hero-title">Find Your Perfect Colors.</h1>
+            <p class="hero-subtitle">
+              Generate beautiful color combinations, explore HEX values, and copy colors instantly for your next design.
+            </p>
+          </div>
+
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary" id="generate-btn">
+              <span class="css-icon-refresh" aria-hidden="true"></span>
+              <span>Generate New Palette</span>
+            </button>
+            <button type="button" class="btn btn-secondary" id="copy-all-btn">
+              <span class="css-icon-copy" aria-hidden="true"></span>
+              <span id="copy-all-text">Copy All Colors</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Color Palette Generator Section -->
+      <section class="generator-section" id="generator" aria-labelledby="palette-workspace-heading">
+        <div class="container">
+          <!-- Workspace Toolbar -->
+          <div class="workspace-toolbar">
+            <div class="toolbar-meta">
+              <h2 id="palette-workspace-heading" class="sr-only">Active Five-Color Palette</h2>
+              <span class="meta-item">
+                Palettes generated: <strong id="palette-counter" class="tabular-nums">0</strong>
+              </span>
+              <span class="meta-separator" aria-hidden="true">·</span>
+              <span class="meta-item" id="lock-status-text">0 of 5 locked</span>
+              <span class="meta-separator keyboard-hint-sep" aria-hidden="true">·</span>
+              <span class="meta-item keyboard-hint">Click any swatch or HEX code to copy</span>
+            </div>
+
+            <div class="toolbar-controls">
+              <button
+                type="button"
+                class="btn btn-ghost"
+                id="reset-locks-btn"
+                disabled
+                aria-label="Unlock all locked color swatches"
+              >
+                Reset Locks
+              </button>
+            </div>
+          </div>
+
+          <!-- Status Banner for Global Feedback -->
+          <div
+            class="feedback-toast"
+            id="global-feedback"
+            role="status"
+            aria-live="polite"
+             aria-atomic="true"
+            hidden
+          ></div>
+
+          <!-- Five Color Swatch Grid -->
+          <div class="palette-grid" id="palette-grid" role="list" aria-label="Generated color swatches">
+            <!-- Populated dynamically and synchronized by script.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Palettes Section -->
+      <section class="recent-section" id="recent-section" aria-labelledby="recent-heading">
+        <div class="container">
+          <div class="section-header-row">
+            <div>
+              <h2 id="recent-heading" class="section-title">Recent Palettes</h2>
+              <p class="section-desc">
+                Your last five generated combinations are saved locally in your browser. Click any palette to restore its colors.
+              </p>
+            </div>
+            <button
+              type="button"
+              class="btn btn-ghost btn-sm"
+              id="clear-history-btn"
+              hidden
+            >
+              Clear History
+            </button>
+          </div>
+
+          <div id="recent-palettes-container" class="recent-list-wrapper">
+            <!-- Populated by script.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="steps-section" id="how-it-works" aria-labelledby="how-it-works-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="how-it-works-heading" class="section-title">How It Works</h2>
+            <p class="section-desc">
+              A straightforward three-step workflow designed for fast visual exploration.
+            </p>
+          </div>
+
+          <div class="steps-grid">
+            <article class="step-card">
+              <div class="step-header">
+                <span class="step-number tabular-nums">01</span>
+                <span class="step-icon step-icon-generate" aria-hidden="true"></span>
+              </div>
+              <h3 class="step-title">Generate</h3>
+              <p class="step-text">
+                Create a fresh set of five random colors with a single click whenever you need inspiration.
+              </p>
+            </article>
+
+            <article class="step-card">
+              <div class="step-header">
+                <span class="step-number tabular-nums">02</span>
+                <span class="step-icon step-icon-explore" aria-hidden="true"></span>
+              </div>
+              <h3 class="step-title">Explore</h3>
+              <p class="step-text">
+                Review each six-digit HEX value and lock specific colors you want to keep while regenerating the rest.
+              </p>
+            </article>
+
+            <article class="step-card">
+              <div class="step-header">
+                <span class="step-number tabular-nums">03</span>
+                <span class="step-icon step-icon-copy" aria-hidden="true"></span>
+              </div>
+              <h3 class="step-title">Copy</h3>
+              <p class="step-text">
+                Copy individual HEX codes by clicking any swatch, or export the complete palette in one click.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="about-section" id="about" aria-labelledby="about-heading">
+        <div class="container">
+          <div class="about-card">
+            <div class="about-main">
+              <h2 id="about-heading" class="section-title">About Color Palette Studio</h2>
+              <p class="about-text">
+                Color Palette Studio is a lightweight utility built for frontend developers, UI designers, and digital creators who need accurate hexadecimal color combinations without workspace clutter. Every swatch renders true-to-code sRGB colors alongside instant clipboard actions and non-destructive color locking.
+              </p>
+            </div>
+            <div class="about-specs">
+              <div class="spec-item">
+                <span class="spec-label">Format</span>
+                <span class="spec-value">6-Digit Hexadecimal (#RRGGBB)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Persistence</span>
+                <span class="spec-value">Local Browser Storage (Up to 5 Palettes)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Export</span>
+                <span class="spec-value">Single Swatch or Newline List</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-primary">
+          Color Palette Studio <span class="footer-divider" aria-hidden="true">|</span> Built with HTML, CSS &amp; JavaScript
+        </p>
+        <p class="footer-note">Designed for creative workflows and frontend practice.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
