@@ -1,81 +1,101 @@
-# Color Palette Studio | Day 14
+# 🎨 Color Palette Studio | Day 14
 
-A simple, responsive, and user-friendly Color Palette Generator built using HTML5, CSS3, and JavaScript as part of my **Veda Technology Web Development Internship, Day 14**.
+A simple, responsive, and interactive **Color Palette Generator** built using HTML5, CSS3, and Vanilla JavaScript as part of my Veda Technology Web Development Internship.
 
-## About the Project
+## 🌐 Live Demo
 
-Color Palette Studio helps users generate random color combinations, explore HEX color codes, and copy colors with a single click.
+**Website:** https://wadityasingh.github.io/Color-Palette-Studio-Day-14/#generator
 
-The project focuses on JavaScript logic, DOM manipulation, random value generation, clipboard functionality, and responsive web design.
+**GitHub Repository:** https://github.com/wadityasingh/Color-Palette-Studio-Day-14
 
-## Features
+## 📌 About the Project
 
-- Generate five random HEX colors.
-- View colors in clean, easy-to-read swatches.
-- Copy individual HEX codes to the clipboard.
-- Copy all five color codes at once.
-- Lock selected colors while generating new palettes.
-- Reset color locks.
-- Save and restore recent palettes using localStorage.
-- Responsive layout for desktop, tablet, and mobile.
-- Simple and clean user interface.
+Color Palette Studio is a lightweight web application that generates random color palettes and allows users to copy HEX color codes with a single click.
 
-## Technologies Used
+The project focuses on practical frontend development concepts, including DOM manipulation, random color generation, clipboard operations, browser storage, and responsive design.
 
-- **HTML5:** Website structure and semantic elements.
-- **CSS3:** Styling, layout, and responsive design.
-- **JavaScript:** Random color generation, DOM manipulation, and interactive features.
-- **Clipboard API:** Copy HEX color codes.
-- **localStorage:** Store recent palettes in the browser.
+## ✨ Features
 
-## Project Structure
+- **Random Color Generation:** Generate a palette containing five HEX colors.
+- **Color Swatches:** View each color in a clear, visually organized card.
+- **Copy HEX Codes:** Copy individual color codes to the clipboard.
+- **Copy All Colors:** Copy all five HEX codes together.
+- **Lock Colors:** Keep selected colors unchanged when generating a new palette.
+- **Reset Locks:** Unlock all selected colors.
+- **Recent Palettes:** Save and restore recent palettes using localStorage.
+- **Responsive Layout:** Designed for desktop, tablet, and mobile screens.
+- **Copy Confirmation:** Display feedback when a color is copied successfully.
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| HTML5 | Page structure and semantic elements |
+| CSS3 | Styling, layout, and responsive design |
+| JavaScript | Color generation and interactive functionality |
+| Clipboard API | Copy HEX codes to the clipboard |
+| localStorage | Store recent palettes in the browser |
+
+## 📁 Project Structure
 
 ```text
 Color-Palette-Studio-Day-14/
+│
 ├── index.html
 ├── style.css
 ├── script.js
 └── README.md
 ```
 
-## How to Run Locally
+The application uses three core files, with HTML for structure, CSS for presentation, and JavaScript for functionality.
 
-1. Download or clone this repository.
-2. Open the project folder.
-3. Open `index.html` in your browser.
-4. Click **Generate New Palette** to create new colors.
-5. Click any HEX code to copy it.
+## 🚀 How to Run Locally
 
-You can also use the Live Server extension in Visual Studio Code for local development.
+**Step 1:** Clone the repository.
 
-## What I Learned
+```bash
+git clone https://github.com/wadityasingh/Color-Palette-Studio-Day-14.git
+```
 
-During this project, I practised:
+**Step 2:** Open the project folder.
 
-- Generating random hexadecimal color values using `Math.random()`.
-- Selecting and updating HTML elements with JavaScript.
-- Handling button clicks and user interactions.
+```bash
+cd Color-Palette-Studio-Day-14
+```
+
+**Step 3:** Open `index.html` in your browser, or open the folder in Visual Studio Code and use the Live Server extension.
+
+**Step 4:** Click **Generate New Palette** to explore different color combinations.
+
+## 📚 Key Learnings
+
+Through this project, I practised:
+
+- Generating random hexadecimal values using `Math.random()`.
+- Manipulating webpage elements using the DOM.
+- Handling user interactions with JavaScript event listeners.
 - Using the Clipboard API to copy text.
-- Managing browser data with localStorage.
-- Creating responsive layouts using CSS Grid and Flexbox.
-- Organizing a small frontend project into separate files.
+- Storing and retrieving browser data with localStorage.
+- Building responsive layouts with CSS Grid and Flexbox.
+- Organizing a frontend project into separate files.
+- Deploying a static website using GitHub Pages.
 
-## Internship Details
+## 🎯 Internship Details
 
 - **Organization:** Veda Technology
 - **Track:** Web Development
-- **Day:** 14
-- **Project:** Color Palette Studio
-- **Level:** Level 1
+- **Task:** Day 14
+- **Project Name:** Color Palette Studio
 
-## Future Improvements
+## 🔮 Future Improvements
 
 - Export palettes as CSS variables.
-- Download palettes as image files.
-- Add color harmony suggestions.
-- Improve accessibility and keyboard controls.
+- Download color palettes as image files.
+- Add complementary and analogous color suggestions.
+- Improve keyboard accessibility.
+- Add more palette customization options.
 
-## Author
+## 👨‍💻 Author
 
 **Aditya Singh**
 
@@ -83,4 +103,6 @@ B.Tech Computer Science and Engineering
 
 ---
 
-Built with HTML5, CSS3, and JavaScript as part of my web development learning journey.
+Built with HTML5, CSS3, and JavaScript as part of my frontend development learning journey.
+
+If you find this project useful, feel free to explore the repository and share your feedback.
