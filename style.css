@@ -1,6 +1,6 @@
 /* ==========================================================================
    Color Palette Studio — Complete Stylesheet (style.css)
-   Built with CSS3 Variables, Flexbox, and CSS Grid
+   Built with CSS3 Variables, Modern System Fonts, Flexbox, and CSS Grid
    ========================================================================== */
 
 :root {
@@ -26,10 +26,9 @@
   --status-success-bg: #F0FDF4;
   --status-success-border: #BBF7D0;
 
-  /* Typography */
-  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* Clean System Font Stack — No External Network Dependencies */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* Spacing Scale */
   --space-1: 0.25rem;  /* 4px */
@@ -75,7 +74,7 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-family);
   font-size: 1rem;
   line-height: 1.6;
   color: var(--text-primary);
@@ -119,13 +118,13 @@ a {
   border: 0;
 }
 
-/* Accessible Focus States */
+/* Visible Keyboard Focus States */
 :focus-visible {
   outline: 2px solid var(--accent-orange);
   outline-offset: 2px;
 }
 
-/* Container */
+/* Centered Container */
 .container {
   width: 100%;
   max-width: 1160px;
@@ -163,7 +162,7 @@ a {
   flex-shrink: 0;
 }
 
-/* Custom CSS Color-Grid Icon */
+/* Custom CSS Color-Grid Logo */
 .css-color-grid {
   display: grid;
   grid-template-columns: repeat(2, 9px);
@@ -199,14 +198,13 @@ a {
 }
 
 .brand-name {
-  font-family: var(--font-display);
   font-size: 1.0625rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text-primary);
 }
 
-/* Navigation */
+/* Navigation Links */
 .main-nav {
   display: flex;
   align-items: center;
@@ -268,7 +266,7 @@ a {
 }
 
 /* ==========================================================================
-   Hero Section (Compact so Palette stays prominently visible)
+   Hero Section
    ========================================================================== */
 
 .hero-section {
@@ -300,7 +298,6 @@ a {
 }
 
 .hero-title {
-  font-family: var(--font-display);
   font-size: clamp(1.85rem, 3.2vw, 2.5rem);
   font-weight: 700;
   line-height: 1.15;
@@ -564,8 +561,16 @@ a {
   font-weight: 600;
   padding: 2px 7px;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.85);
-  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #18181B;
+  box-shadow: var(--shadow-xs);
+}
+
+/* Contrast-aware adaptation when swatch is dark */
+.swatch-color-area[data-contrast="dark"] .swatch-index {
+  background-color: rgba(24, 24, 27, 0.8);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Lock Button inside Swatch */
@@ -577,23 +582,34 @@ a {
   min-height: 32px;
   border-radius: var(--radius-sm);
   background-color: rgba(255, 255, 255, 0.92);
-  color: var(--text-primary);
+  color: #18181B;
   font-size: 0.75rem;
   font-weight: 600;
   border: 1px solid rgba(24, 24, 27, 0.12);
   box-shadow: var(--shadow-xs);
   transition: background-color var(--duration-fast) var(--ease-out),
-              color var(--duration-fast) var(--ease-out);
+              color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
 }
 
 .lock-btn:hover {
   background-color: #FFFFFF;
 }
 
-.lock-btn[aria-pressed="true"] {
-  background-color: var(--text-primary);
+.swatch-color-area[data-contrast="dark"] .lock-btn {
+  background-color: rgba(24, 24, 27, 0.85);
   color: #FFFFFF;
-  border-color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.swatch-color-area[data-contrast="dark"] .lock-btn:hover {
+  background-color: rgba(24, 24, 27, 0.95);
+}
+
+.lock-btn[aria-pressed="true"] {
+  background-color: var(--text-primary) !important;
+  color: #FFFFFF !important;
+  border-color: var(--text-primary) !important;
 }
 
 /* Pure CSS Padlock Icon */
@@ -630,11 +646,16 @@ a {
   font-weight: 500;
   padding: 3px 8px;
   border-radius: 4px;
-  background-color: rgba(24, 24, 27, 0.75);
+  background-color: rgba(24, 24, 27, 0.85);
   color: #FFFFFF;
   opacity: 0;
   transition: opacity var(--duration-fast) var(--ease-out);
   pointer-events: none;
+}
+
+.swatch-color-area[data-contrast="dark"] .swatch-click-hint {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #18181B;
 }
 
 /* Swatch Card Footer */
@@ -753,7 +774,6 @@ a {
 }
 
 .section-title {
-  font-family: var(--font-display);
   font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -881,7 +901,7 @@ a {
   color: var(--accent-orange);
 }
 
-/* Simple Pure CSS Step Icons */
+/* Pure CSS Step Icons */
 .step-icon {
   display: inline-block;
   width: 24px;
@@ -923,7 +943,6 @@ a {
 }
 
 .step-title {
-  font-family: var(--font-display);
   font-size: 1.0625rem;
   font-weight: 700;
   color: var(--text-primary);

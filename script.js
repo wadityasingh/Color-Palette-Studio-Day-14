@@ -76,7 +76,7 @@
   }
 
   /**
-   * Converts a valid 6-digit HEX code into an RGB string for helpful secondary inspection.
+   * Converts a valid 6-digit HEX code into an RGB string.
    * @param {string} hex
    * @returns {string} e.g. "rgb(231, 111, 81)"
    */
@@ -87,6 +87,22 @@
     const g = parseInt(clean.substring(2, 4), 16);
     const b = parseInt(clean.substring(4, 6), 16);
     return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  /**
+   * Determines whether a HEX color is dark or light using YIQ formula.
+   * Used for contrast-aware badge and button styling over the swatch.
+   * @param {string} hex
+   * @returns {'dark'|'light'}
+   */
+  function getLuminanceContrast(hex) {
+    if (!isValidHex(hex)) return 'light';
+    const clean = hex.slice(1);
+    const r = parseInt(clean.substring(0, 2), 16);
+    const g = parseInt(clean.substring(2, 4), 16);
+    const b = parseInt(clean.substring(4, 6), 16);
+    const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+    return yiq < 128 ? 'dark' : 'light';
   }
 
   /* ==========================================================================
@@ -118,7 +134,7 @@
         }
       }
     } catch {
-      // Ignore storage errors if localStorage is disabled or restricted
+      // Ignore storage errors if localStorage is disabled
     }
   }
 
@@ -133,7 +149,7 @@
         String(state.paletteCounter)
       );
     } catch {
-      // Fail gracefully if localStorage is unavailable
+      // Fail gracefully if localStorage is restricted
     }
   }
 
@@ -160,7 +176,7 @@
      ========================================================================== */
 
   /**
-   * Copies text to clipboard using navigator.clipboard.writeText() with a fallback.
+   * Copies text to clipboard using navigator.clipboard.writeText() with fallback.
    * @param {string} text
    * @returns {Promise<boolean>}
    */
@@ -172,11 +188,11 @@
         await navigator.clipboard.writeText(text);
         return true;
       } catch {
-        // Fall through to fallback method if Clipboard API is blocked by permissions
+        // Fall through to fallback method if Clipboard API is blocked
       }
     }
 
-    // Fallback copy method using a temporary off-screen textarea
+    // Fallback copy method using temporary textarea
     try {
       const textArea = document.createElement('textarea');
       textArea.value = text;
@@ -215,10 +231,11 @@
 
     state.globalToastTimeout = setTimeout(() => {
       elements.globalFeedback.hidden = true;
-    }, 2600);
+    }, 2800);
   }
 
   function showSwatchCopyConfirmation(index, hex) {
+    if (!elements.paletteGrid) return;
     const card = elements.paletteGrid.querySelector(
       `[data-swatch-index="${index}"]`
     );
@@ -395,6 +412,7 @@
       const hex = isValidHex(swatch.hex) ? swatch.hex.toUpperCase() : '#EA580C';
       const rgb = hexToRgbString(hex);
       const isLocked = Boolean(swatch.locked);
+      const contrast = getLuminanceContrast(hex);
 
       const card = document.createElement('article');
       card.className = `swatch-card${isLocked ? ' is-locked' : ''}`;
@@ -405,6 +423,7 @@
       const colorArea = document.createElement('div');
       colorArea.className = 'swatch-color-area';
       colorArea.style.backgroundColor = hex;
+      colorArea.setAttribute('data-contrast', contrast);
       colorArea.setAttribute('role', 'button');
       colorArea.setAttribute('tabindex', '0');
       colorArea.setAttribute(
@@ -536,7 +555,7 @@
     }
 
     const grid = document.createElement('div');
-      grid.className = 'recent-grid';
+    grid.className = 'recent-grid';
 
     state.recentPalettes.forEach((palette, idx) => {
       const btn = document.createElement('button');
@@ -602,6 +621,18 @@
     if (elements.clearHistoryBtn) {
       elements.clearHistoryBtn.addEventListener('click', clearRecentHistory);
     }
+
+    // Keyboard shortcut: Spacebar generates a new palette
+    window.addEventListener('keydown', (event) => {
+      if (event.code === 'Space' || event.key === ' ') {
+        const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+        if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'button') {
+          return;
+        }
+        event.preventDefault();
+        generateNewPalette();
+      }
+    });
 
     // Mobile Menu Toggle
     if (elements.mobileMenuBtn && elements.mainNav) {
